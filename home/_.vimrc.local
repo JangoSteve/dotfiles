@@ -3,3 +3,12 @@ let NERDTreeDirArrows = 1
 let NERDTreeMouseMode = 1
 " <Ctrl-l> redraws the screen and removes any search highlighting.
 nnoremap <silent> <C-l> :nohl<CR><C-l>
+" <Ctrl-k> eliminates trailing whitespace
+" The variable _s is used to save and restore the last search pattern register
+" (so next time the user presses n they will continue their last search), and
+" :nohl is used to switch off search highlighting (so trailing spaces will not
+" be highlighted while the user types). The e flag is used in the substitute
+" command so no error is shown if trailing whitespace is not found. Unlike
+" before, the substitution text must be specified in order to use the required
+" flag.
+nnoremap <silent> <C-k> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
