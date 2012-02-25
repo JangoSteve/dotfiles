@@ -1,0 +1,5 @@
+color jellybeans+
+let NERDTreeDirArrows = 1
+let NERDTreeMouseMode = 1
+" <Ctrl-l> redraws the screen and removes any search highlighting.
+nnoremap <silent> <C-l> :nohl<CR><C-l>
