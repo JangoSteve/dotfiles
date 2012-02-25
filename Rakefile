@@ -10,11 +10,11 @@ task :install do
 
     if File.exist?(target)
       if File.identical? file, target
-        puts "identical #{target}"
+        puts cyan("identical #{target}")
       elsif replace_all
         replace_file(file)
       else
-        print "overwrite #{target}? [ynaq] "
+        print yellow("overwrite #{target}? [ynaq] ")
         case $stdin.gets.chomp
         when 'a'
           replace_all = true
@@ -31,6 +31,19 @@ task :install do
       link_file(file)
     end
   end
+  puts green("Success! Be sure to restart terminal or run `source ~/.bash_profile`")
+end
+
+def yellow(str)
+  "\e[33m#{str}\e[0m"
+end
+
+def cyan(str)
+  "\e[36m#{str}\e[0m"
+end
+
+def green(str)
+  "\e[32m#{str}\e[0m"
 end
 
 def target_for(file)
