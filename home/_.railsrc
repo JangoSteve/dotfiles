@@ -1,0 +1,8 @@
+#!/usr/bin/ruby
+
+begin
+  require 'hirb'
+  Hirb.enable
+rescue LoadError
+  puts "install hirg for table views: gem install hirb"
+end
