@@ -25,6 +25,13 @@ instead. Anywhere you see `_.` in directory and filenames within the
 `/home` folder,
 will be replaced with just a `.` in the target destination.
 
+## ERB
+
+There are some files, like `.giconfig`, where I didn't want to store
+that stuff in the repo. So instead, inspired by ryanb's dotfiles, I
+added prompts to type that stuff in when the install script is run,
+using erb.
+
 ## Installation
 
 ```
