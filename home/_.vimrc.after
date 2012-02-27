@@ -12,3 +12,9 @@ nnoremap <silent> <C-l> :nohl<CR><C-l>
 " before, the substitution text must be specified in order to use the required
 " flag.
 nnoremap <silent> <C-k> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
+" Allow moving between splits by pressing Ctrl+hjkl.
+" Noremap is used to override some NERDTree mappings.
+noremap <C-h> <C-w>h
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-l> <C-w>l
