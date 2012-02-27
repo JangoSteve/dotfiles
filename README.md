@@ -27,6 +27,8 @@ will be replaced with just a `.` in the target destination.
 
 ## Installation
 
-1. `git clone git://github.com/JangoSteve/dotfiles.git`
-2. `cd dotfiles`
-3. `rake install`
+```
+git clone git://github.com/JangoSteve/dotfiles.git
+cd dotfiles
+rake install
+```
