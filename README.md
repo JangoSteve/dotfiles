@@ -4,6 +4,14 @@ These are my dotfiles. The structure and method for keeping track of
 these was inspired largely by
 [ryanb](https://github.com/ryanb/dotfiles) and [holman](https://github.com/holman/dotfiles), but with some modifications.
 
+## Installation
+
+```
+git clone git://github.com/JangoSteve/dotfiles.git
+cd dotfiles
+rake install
+```
+
 ## Organization and naming
 
 All my dotfiles go somewhere in my home folder `~/` (on Mac OSX). I
@@ -31,11 +39,3 @@ There are some files, like `.giconfig`, where I didn't want to store
 that stuff in the repo. So instead, inspired by ryanb's dotfiles, I
 added prompts to type that stuff in when the install script is run,
 using erb.
-
-## Installation
-
-```
-git clone git://github.com/JangoSteve/dotfiles.git
-cd dotfiles
-rake install
-```
