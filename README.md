@@ -12,7 +12,7 @@ cd dotfiles
 rake install
 ```
 
-## Organization and naming
+## Organization
 
 All my dotfiles go somewhere in my home folder `~/` (on Mac OSX). I
 wanted a simple way to keep track of these files that didn't make too
