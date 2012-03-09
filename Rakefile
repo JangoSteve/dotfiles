@@ -5,8 +5,17 @@ desc "install the dot files into user's home directory"
 task :install do
   replace_all = false
   Dir['home/**/*'].each do |file|
-    next if File.directory?(file)
     target = target_for(file)
+
+    # TODO: Just symlink root directory instead of symlinking each individual file
+    # if directory doesn't exist in HOME
+    if File.directory?(file)
+      unless File.exists?(target)
+        puts "Making directory #{target}"
+        Dir.mkdir(target)
+      end
+      next
+    end
 
     if File.exist?(target)
       if File.identical? file, target
