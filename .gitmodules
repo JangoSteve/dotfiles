@@ -1,3 +1,6 @@
 [submodule "home/_.janus/vim-less"]
 	path = home/_.janus/vim-less
 	url = git://github.com/groenewege/vim-less.git
+[submodule "home/_.janus/csspretty"]
+	path = home/_.janus/csspretty
+	url = git://github.com/vim-scripts/Css-Pretty.git
