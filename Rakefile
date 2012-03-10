@@ -19,7 +19,7 @@ task :install do
 
     if File.exist?(target)
       if File.identical? file, target
-        puts cyan("identical #{target}")
+        puts "identical #{target}"
       elsif replace_all
         replace_file(file)
       else
@@ -68,12 +68,12 @@ end
 def link_file(file)
   target = target_for(file)
   if file =~ /.erb$/
-    puts "generating #{target} from #{file}"
+    puts cyan("generating #{target} from #{file}")
     File.open(target, 'w') do |new_file|
       new_file.write ERB.new(File.read(file)).result(binding)
     end
   else
-    puts "linking #{file} => #{target}"
+    puts cyan("linking #{file} => #{target}")
     system %Q{ln -s "$PWD/#{file}" "#{target}"}
   end
 end
