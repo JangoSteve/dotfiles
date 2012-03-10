@@ -23,4 +23,7 @@ inoremap jk <Esc>
 " Map indent/format key (=) to csstidy for css files, e.g. gg=G to format
 " entire css file.
 "autocmd filetype css setlocal equalprg=csstidy\ -\ --silent=true 
-noremap <Leader>f :call CssPretty()<CR><Esc>
+noremap _f :call CssPretty()<CR>
+" Get rid of trailing whitespace for file
+noremap _$ :call Preserve("%s/\\s\\+$//e")<CR>
+noremap _G :call Preserve("normal gg=G")<CR>
