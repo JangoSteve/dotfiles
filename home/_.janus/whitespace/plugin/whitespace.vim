@@ -9,3 +9,8 @@ function! Preserve(command)
   let @/=_s
   call cursor(l, c)
 endfunction
+
+function! TabToSpace()
+  set expandtab
+  retab!
+endfunction
