@@ -23,4 +23,4 @@ inoremap jk <Esc>
 " Map indent/format key (=) to csstidy for css files, e.g. gg=G to format
 " entire css file.
 "autocmd filetype css setlocal equalprg=csstidy\ -\ --silent=true 
-noremap <Leader>= :call CssPretty()<CR><Esc>
+noremap <Leader>f :call CssPretty()<CR><Esc>
