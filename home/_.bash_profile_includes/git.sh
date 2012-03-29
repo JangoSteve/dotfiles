@@ -13,5 +13,6 @@ alias gme="git merge"
 alias glo="git log"
 alias gbl="git branch list"
 alias gfe="git fetch"
+alias gf="git fetch" # slightly shorter version
 alias grs="git remote -v"
 alias grl="git remote -v" # I forget it's "show" and not "list"
