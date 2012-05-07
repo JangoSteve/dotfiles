@@ -5,6 +5,14 @@ fileFromUrl(){
 curlo(){
   local url=$1
   local file="$(fileFromUrl $url)"
-  echo "downloading $url > ./$file"
-  echo $(curl $url -o ./$file)
+
+  if [ -z "$2" ]
+    then
+      local dest="./"
+    else
+      local dest="$2"
+  fi
+
+  echo "downloading $url > $dest$file"
+  echo $(curl $url -o $dest$file)
 }
