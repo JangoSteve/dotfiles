@@ -1,3 +1,5 @@
 alias rs="rails s"
 alias rc="rails c"
 alias ber="bundle exec rspec"
+alias test="ruby -Itest"
+alias bet="bundle exec rake test"
