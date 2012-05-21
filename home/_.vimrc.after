@@ -28,3 +28,5 @@ noremap _f :call CssPretty()<CR>
 noremap _$ :call Preserve("%s/\\s\\+$//e")<CR>
 noremap _G :call Preserve("normal gg=G")<CR>
 noremap _t :call TabToSpace()<CR>
+
+noremap <D-F> :Ack!<space>
