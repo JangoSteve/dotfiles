@@ -4,3 +4,5 @@ js=.coffee
 html=.haml
 --type-add
 css=.sass,.scss
+--type-add
+html=.slim
