@@ -32,8 +32,12 @@ command_style=$reset_style'\[\033[1;29m\]' # bold black
 
 # Prompt variable:
 
-parse_git_branch() {
- git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+# From https://gist.github.com/31631
+function parse_git_dirty {
+  [[ $(git status 2> /dev/null | tail -n1) != "nothing to commit (working directory clean)" ]] && echo "*"
+}
+function parse_git_branch {
+  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/(\1$(parse_git_dirty))/"
 }
 export -f parse_git_branch
 export CLICOLOR=1
