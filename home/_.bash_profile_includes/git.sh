@@ -19,4 +19,4 @@ alias grs="git remote -v"
 alias grl="git remote -v" # I forget it's "show" and not "list"
 alias grh="git reset HEAD"
 alias gdi="git diff"
-alias gitnotes='git log --pretty=format:"* %s"'
+alias gitsum='git log --pretty=format:"* %s" --author `git config user.email`'
