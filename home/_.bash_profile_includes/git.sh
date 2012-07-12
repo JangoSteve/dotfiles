@@ -21,3 +21,4 @@ alias grh="git reset HEAD"
 alias gdi="git diff"
 alias gitsum='git log --pretty=format:"* %s" --author `git config user.email`'
 alias gsu="gitsum"
+alias gtr="git log --graph --pretty=oneline --abbrev-commit"
