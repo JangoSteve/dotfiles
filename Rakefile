@@ -6,6 +6,7 @@ task :install do
   link_dotfiles
   backup_and_execute_osx_prefs
   puts green("Success! Be sure to restart terminal or run `source ~/.bash_profile`")
+  puts green("And run `qlmanage -r` to reload quicklook plugins if necessary")
 end
 
 def link_dotfiles
