@@ -1,3 +1,8 @@
+# TODO: Look into replacing this with
+# * dirname
+# * basename
+# * curl -O
+
 fileFromUrl(){
   echo `echo "$@" | sed 's/.*\(\/\)\([^\/]*$\)/\2/'`
 }
@@ -14,5 +19,5 @@ curlo(){
   fi
 
   echo "downloading $url > $dest$file"
-  echo $(curl $url -o $dest$file)
+  echo $(curl -L $url -o $dest$file)
 }

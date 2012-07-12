@@ -33,6 +33,7 @@ command_style=$reset_style'\[\033[1;29m\]' # bold black
 # Prompt variable:
 
 # From https://gist.github.com/31631
+# TODO: Look into git completion commands like __git_ps1
 function parse_git_dirty {
   [[ $(git status 2> /dev/null | tail -n1) != "nothing to commit (working directory clean)" ]] && echo "*"
 }
