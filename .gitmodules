@@ -7,3 +7,6 @@
 [submodule "home/_.janus/vim-slim"]
 	path = home/_.janus/vim-slim
 	url = git://github.com/bbommarito/vim-slim.git
+[submodule "home/_.janus/vim-jade"]
+	path = home/_.janus/vim-jade
+	url = git://github.com/digitaltoad/vim-jade.git
