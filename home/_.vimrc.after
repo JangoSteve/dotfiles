@@ -30,3 +30,6 @@ noremap _G :call Preserve("normal gg=G")<CR>
 noremap _t :call TabToSpace()<CR>
 
 noremap <D-F> :Ack!<space>
+
+" Open file in Marked (markdown viewer)
+nnoremap <leader>m :silent !open -a Marked.app '%:p'<cr>
