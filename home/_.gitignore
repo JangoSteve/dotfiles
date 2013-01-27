@@ -3,3 +3,5 @@ Procfile.me
 .sass-cache/
 .rvmrc
 .powrc
+*.sql
+*.sql.gz
