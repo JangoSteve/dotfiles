@@ -18,17 +18,18 @@
 
 # From https://gist.github.com/31631
 # TODO: Look into git completion commands like __git_ps1
-function parse_git_dirty {
-  [[ $(git status 2> /dev/null | tail -n1) != "nothing to commit (working directory clean)" ]] && echo "*"
-}
-
 function parse_git_branch {
   git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* //"
 }
 
+function parse_git_dirty {
+  gitbranch=$(parse_git_branch)
+  [[ $gitbranch != "" ]] && [[ $(git status 2> /dev/null | tail -n1) != "nothing to commit (working directory clean)" ]] && echo "*"
+}
+
 function git_info {
   gitbranch=$(parse_git_branch)
-  [[ $gitbranch != "" ]] && echo "($gitbranch$(parse_git_dirty))"
+  [[ $gitbranch != "" ]] && echo "$gitbranch"
 }
 
 # Idea from http://blog.ubrio.us/nix/best-bash-prompt/
@@ -65,8 +66,9 @@ function prompt_command {
 PROMPT_COMMAND=prompt_command
 
 export -f parse_git_branch
-export -f parse_last_status
+export -f parse_git_dirty
 export -f git_info
+export -f parse_last_status
 
 DEFAULT_COLOR="\033[0;0m"
 ORANGE="\033[0;33m"
@@ -87,7 +89,7 @@ reset_style='\['$DEFAULT_COLOR'\]'
 status_style=$reset_style'\['$GRAY'\]'
 
 export CLICOLOR=1
-export PS1="$status_style"'$fill \d \t\n'"\[\$(parse_last_status)\]\W \[$CYAN\]\$(git_info)\[$WHITE\]$ "
+export PS1="$status_style"'$fill \d \t\n'"\[\$(parse_last_status)\]\W \[$CYAN\]\$(git_info)\[$YELLOW\]\$(parse_git_dirty)\[$WHITE\]$ "
 export SUDO_PS1='\[\e[0;31m\]\u\[\e[m\] \[\e[1;34m\]\w\[\e[m\] \[\e[0;31m\]\$ \[\e[0m\]'
 
 # Reset color for command output
