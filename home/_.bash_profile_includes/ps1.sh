@@ -23,7 +23,12 @@ function parse_git_dirty {
 }
 
 function parse_git_branch {
-  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/(\1$(parse_git_dirty))/"
+  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* //"
+}
+
+function git_info {
+  gitbranch=$(parse_git_branch)
+  [[ $gitbranch != "" ]] && echo "($gitbranch$(parse_git_dirty))"
 }
 
 # Idea from http://blog.ubrio.us/nix/best-bash-prompt/
@@ -61,6 +66,7 @@ PROMPT_COMMAND=prompt_command
 
 export -f parse_git_branch
 export -f parse_last_status
+export -f git_info
 
 DEFAULT_COLOR="\033[0;0m"
 ORANGE="\033[0;33m"
@@ -81,7 +87,7 @@ reset_style='\['$DEFAULT_COLOR'\]'
 status_style=$reset_style'\['$GRAY'\]'
 
 export CLICOLOR=1
-export PS1="$status_style"'$fill \d \t\n'"\[\$(parse_last_status)\]\W \[$CYAN\]\$(parse_git_branch)\[$WHITE\]$ "
+export PS1="$status_style"'$fill \d \t\n'"\[\$(parse_last_status)\]\W \[$CYAN\]\$(git_info)\[$WHITE\]$ "
 export SUDO_PS1='\[\e[0;31m\]\u\[\e[m\] \[\e[1;34m\]\w\[\e[m\] \[\e[0;31m\]\$ \[\e[0m\]'
 
 # Reset color for command output
