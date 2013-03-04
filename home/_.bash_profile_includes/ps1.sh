@@ -16,15 +16,81 @@
 
 ###########################################
 
+function get_git_branch {
+  git branch --no-color 2> /dev/null
+}
+
 # From https://gist.github.com/31631
 # TODO: Look into git completion commands like __git_ps1
 function parse_git_branch {
-  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* //"
+  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/\1 /"
 }
 
 function parse_git_dirty {
-  gitbranch=$(parse_git_branch)
+  gitbranch=$(get_git_branch)
   [[ $gitbranch != "" ]] && [[ $(git status 2> /dev/null | tail -n1) != "nothing to commit (working directory clean)" ]] && echo "*"
+}
+
+# taken from http://plasti.cx/2009/10/23/vebose-git-dirty-prompt
+# origin of work http://henrik.nyh.se/2008/12/git-dirty-prompt
+# Further modified by @jangosteve
+function parse_git_dirty_2 {
+  if [[ $(get_git_branch) != "" ]]
+  then
+    status=$(git status 2> /dev/null)
+    ahead=`    echo -n "${status}" 2> /dev/null | grep -q "Your branch is ahead of" 2> /dev/null; echo "$?"`
+    diverged=` echo -n "${status}" 2> /dev/null | grep -q "have diverged" 2> /dev/null; echo "$?"`
+    committed=`echo -n "${status}" 2> /dev/null | grep -q "Changes to be committed" 2> /dev/null; echo "$?"`
+    dirty=`    echo -n "${status}" 2> /dev/null | grep -q "Changes not staged for commit" 2> /dev/null; echo "$?"`
+    untracked=`echo -n "${status}" 2> /dev/null | grep -q "Untracked files" 2> /dev/null; echo "$?"`
+    newfile=`  echo -n "${status}" 2> /dev/null | grep -q "new file:" 2> /dev/null; echo "$?"`
+    renamed=`  echo -n "${status}" 2> /dev/null | grep -q "renamed:" 2> /dev/null; echo "$?"`
+    modified=` echo -n "${status}" 2> /dev/null | grep -q "modified:" 2> /dev/null; echo "$?"`
+    deleted=`  echo -n "${status}" 2> /dev/null | grep -q "deleted:" 2> /dev/null; echo "$?"`
+
+    bitsum=''
+    bitind=''
+
+    # Summary statuses
+    if [ "${diverged}" == "0" ]; then
+      bitsum="${bitsum}!"
+    fi
+    if [ "${ahead}" == "0" ]; then
+      bitsum="${bitsum}^"
+    fi
+    if [ "${committed}" == "0" ]; then
+      bitsum="${bitsum}&"
+    fi
+    if [ "${dirty}" == "0" ]; then
+      bitsum="${bitsum}*"
+    fi
+    if [ "${untracked}" == "0" ]; then
+      bitsum="${bitsum}?"
+    fi
+
+    # Individual file statuses
+    if [ "${modified}" == "0" ]; then
+      bitind="${bitind}%"
+    fi
+    if [ "${renamed}" == "0" ]; then
+      bitind="${bitind}>"
+    fi
+    if [ "${newfile}" == "0" ]; then
+      bitind="${bitind}+"
+    fi
+    if [ "${deleted}" == "0" ]; then
+      bitind="${bitind}-"
+    fi
+
+    # Status separator
+    if [[ "${bitsum}" != '' && ${bitind} != '' ]]; then
+      bitsum="${bitsum}:"
+    fi
+
+    if [ "${bitsum}${bitind}" != '' ]; then
+      echo "${bitsum}${bitind} "
+    fi
+  fi
 }
 
 function git_info {
@@ -65,8 +131,10 @@ function prompt_command {
 
 PROMPT_COMMAND=prompt_command
 
+export -f get_git_branch
 export -f parse_git_branch
 export -f parse_git_dirty
+export -f parse_git_dirty_2
 export -f git_info
 export -f parse_last_status
 
@@ -89,7 +157,7 @@ reset_style='\['$DEFAULT_COLOR'\]'
 status_style=$reset_style'\['$GRAY'\]'
 
 export CLICOLOR=1
-export PS1="$status_style"'$fill \d \t\n'"\[\$(parse_last_status)\]\W \[$CYAN\]\$(git_info)\[$YELLOW\]\$(parse_git_dirty)\[$WHITE\]$ "
+export PS1="$status_style"'$fill \d \t\n'"\[\$(parse_last_status)\]\W \[$CYAN\]\$(git_info)\[$ORANGE\]\$(parse_git_dirty_2)\[$WHITE\]$ "
 export SUDO_PS1='\[\e[0;31m\]\u\[\e[m\] \[\e[1;34m\]\w\[\e[m\] \[\e[0;31m\]\$ \[\e[0m\]'
 
 # Reset color for command output
