@@ -29,7 +29,7 @@ function parse_git_branch {
 # Idea from http://blog.ubrio.us/nix/best-bash-prompt/
 # Modified with help from @bigeasy
 function parse_last_status {
-  RET=$?; [ $RET -eq 0 ] && echo -e "\033[01;36m" || echo -e "\033[01;31m"
+  RET=$?; [ $RET -eq 0 ] && echo -e "$GREEN" || echo -e "$RED"
 }
 
 function prompt_command {
@@ -57,17 +57,31 @@ function prompt_command {
   esac
 }
 
-reset_style='\[\033[00m\]'
-status_style=$reset_style'\[\033[0;90m\]' # gray color; use 0;37m for lighter color
-prompt_style=$reset_style
-command_style=$reset_style'\[\033[1;29m\]' # bold black
-
 PROMPT_COMMAND=prompt_command
 
 export -f parse_git_branch
 export -f parse_last_status
+
+DEFAULT_COLOR="\033[0;0m"
+ORANGE="\033[0;33m"
+RED="\033[0;31m"
+YELLOW="\033[1;33m"
+GREEN="\033[0;32m"
+LIGHT_PURPLE="\033[1;34m"
+WHITE="\033[1;37m"
+PURPLE="\033[1;35m"
+CYAN="\033[1;36m"
+BLUE="\033[0;34m"
+LIGHT_GRAY="\033[0;37m"
+DARK_GRAY="\033[1;30m"
+GRAY="\033[0;90m"
+BLACK="\033[0;30m"
+
+reset_style='\['$DEFAULT_COLOR'\]'
+status_style=$reset_style'\['$GRAY'\]'
+
 export CLICOLOR=1
-export PS1="$status_style"'$fill \d \t\n'"\[\$(parse_last_status)\]\W \[\033[33m\]\$(parse_git_branch)\[\033[00m\]$\[\033[00m\] "
+export PS1="$status_style"'$fill \d \t\n'"\[\$(parse_last_status)\]\W \[$CYAN\]\$(parse_git_branch)\[$WHITE\]$ "
 export SUDO_PS1='\[\e[0;31m\]\u\[\e[m\] \[\e[1;34m\]\w\[\e[m\] \[\e[0;31m\]\$ \[\e[0m\]'
 
 # Reset color for command output
