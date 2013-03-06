@@ -10,3 +10,6 @@
 [submodule "home/_.janus/vim-jade"]
 	path = home/_.janus/vim-jade
 	url = git://github.com/digitaltoad/vim-jade.git
+[submodule "home/_.janus/vim-gitgutter"]
+	path = home/_.janus/vim-gitgutter
+	url = https://github.com/airblade/vim-gitgutter.git
