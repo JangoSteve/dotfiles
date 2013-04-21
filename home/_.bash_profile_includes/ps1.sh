@@ -53,38 +53,39 @@ function parse_git_dirty_2 {
 
     # Summary statuses
     if [ "${diverged}" == "0" ]; then
-      bitsum="${bitsum}!"
+      bitsum="${bitsum}⎇ "
     fi
     if [ "${ahead}" == "0" ]; then
-      bitsum="${bitsum}^"
+      bitsum="${bitsum}⇧ "
     fi
     if [ "${committed}" == "0" ]; then
-      bitsum="${bitsum}&"
+      bitsum="${bitsum}✓ "
     fi
     if [ "${dirty}" == "0" ]; then
-      bitsum="${bitsum}*"
+      bitsum="${bitsum}± "
     fi
     if [ "${untracked}" == "0" ]; then
-      bitsum="${bitsum}?"
+      bitsum="${bitsum}⚐ "
     fi
 
     # Individual file statuses
     if [ "${modified}" == "0" ]; then
-      bitind="${bitind}%"
+      bitind="${bitind}~ "
     fi
     if [ "${renamed}" == "0" ]; then
-      bitind="${bitind}>"
+      bitind="${bitind}➔ "
     fi
     if [ "${newfile}" == "0" ]; then
-      bitind="${bitind}+"
+      bitind="${bitind}+ "
     fi
     if [ "${deleted}" == "0" ]; then
-      bitind="${bitind}-"
+      bitind="${bitind}- "
     fi
 
     # Status separator
     if [[ "${bitsum}" != '' && ${bitind} != '' ]]; then
-      bitsum="${bitsum}:"
+      bitsum="${bitsum}( "
+      bitind="${bitind})"
     fi
 
     if [ "${bitsum}${bitind}" != '' ]; then
