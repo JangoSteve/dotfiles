@@ -2,6 +2,7 @@
 Procfile.me
 .sass-cache/
 .rvmrc
+.ruby-gemset
 .powrc
 *.sql
 *.sql.gz
