@@ -13,3 +13,6 @@
 [submodule "home/_.janus/vim-gitgutter"]
 	path = home/_.janus/vim-gitgutter
 	url = https://github.com/airblade/vim-gitgutter.git
+[submodule "home/_.bash_profile_includes/start"]
+	path = home/_.bash_profile_includes/start
+	url = https://github.com/JangoSteve/start.git
