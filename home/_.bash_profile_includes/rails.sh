@@ -71,7 +71,6 @@ start(){
     }
   elif [ -n "$commanda" ]
   then
-    echo "true"
     echo -e "$cyan$executinglabel$reset $commanda"
     $commanda
   fi
