@@ -19,7 +19,7 @@ note(){
   GRAY="\033[0;90m"
   BLACK="\033[0;30m"
 
-  local mystr=$1
+  local mystr=$@
   # Create a $fill of all screen width minus the length of the argument string divided by 2:
   let mystrlen=${COLUMNS}-${#mystr}-2
   let fillsize=$((${mystrlen}/2))
