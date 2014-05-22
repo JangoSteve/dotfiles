@@ -12,6 +12,16 @@ cd dotfiles
 rake install
 ```
 
+For the bash profile enhancements to work, you'll want to include this
+in your `~/.bash_profile` file if it's not already there:
+
+```
+# Find all .sh files and .sh files in subdirectories - ss
+for file in $(find ~/.bash_profile_includes -name '*.sh'); do
+  [[ -r $file ]] && source $file;
+done
+```
+
 ## Organization
 
 All my dotfiles go somewhere in my home folder `~/`. I
