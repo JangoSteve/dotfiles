@@ -1,6 +1,6 @@
 # Output the argument string to the terminal with a bunch of minuses as a divider
 # E.g.:
-#   $ note "Starting work"
+#   $ note Starting work
 #   $ ---------- Starting work ----------
 #   $
 note(){
