@@ -36,3 +36,4 @@ noremap <D-F> :Ack!<space>
 nnoremap <leader>m :silent !open -a Marked.app '%:p'<cr>
 " Remove highlight
 nnoremap <C-n> :nohl<cr>
+vmap r "_dP
