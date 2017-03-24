@@ -1,0 +1,1 @@
+export ACKRC=".ackrc"
