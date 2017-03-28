@@ -14,6 +14,7 @@ alias gre="git rebase"
 alias gad="git add"
 alias gcl="git clone"
 alias gme="git merge"
+__git_complete gme _git_checkout
 alias glo="git log"
 alias gbl="git branch -l"
 alias gbla="git branch -a"
