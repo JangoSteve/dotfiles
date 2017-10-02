@@ -1,6 +1,7 @@
 color jellybeans+
 set textwidth=0 wrapmargin=0
 set guifont=Inconsolata:h12
+set titlestring=%{substitute(getcwd(),$HOME,'~','')}\ (%{substitute(expand('%:p:t'),getcwd(),'','')})
 let NERDTreeDirArrows = 1
 let NERDTreeMouseMode = 1
 " <Ctrl-l> redraws the screen and removes any search highlighting.
