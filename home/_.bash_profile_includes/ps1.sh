@@ -111,6 +111,11 @@ function prompt_command {
 
   # create a $fill of all screen width minus the time string and a space:
   let fillsize=${COLUMNS}-20
+
+  # Make room for the weather (weather.sh), e.g. "☁ 72° "
+  weather=""
+  declare -F weather_status >/dev/null && weather_status
+  [ -n "$weather" ] && let fillsize=${fillsize}-${weather_width}-1
   fill=""
   while [ "$fillsize" -gt "0" ]
   do
@@ -158,7 +163,7 @@ reset_style='\['$DEFAULT_COLOR'\]'
 status_style=$reset_style'\['$GRAY'\]'
 
 export CLICOLOR=1
-export PS1="$status_style"'$fill \d \t\n'"\[\$(parse_last_status)\]\W \[$CYAN\]\$(git_info)\[$ORANGE\]\$(parse_git_dirty_2)\[$WHITE\]$ "
+export PS1="$status_style"'$fill ${weather:+$weather }\d \t\n'"\[\$(parse_last_status)\]\W \[$CYAN\]\$(git_info)\[$ORANGE\]\$(parse_git_dirty_2)\[$WHITE\]$ "
 export SUDO_PS1='\[\e[0;31m\]\u\[\e[m\] \[\e[1;34m\]\w\[\e[m\] \[\e[0;31m\]\$ \[\e[0m\]'
 
 # Reset color for command output
